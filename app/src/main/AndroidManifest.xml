@@ -10,6 +10,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CitiesOfTheWorld">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA4QgWZMgWuDKPO0gU8Mx2RqBK9g9mCGi0" />
+
         <activity
             android:name=".presentation.view_cities.ui.HomeActivity"
             android:exported="true" >
