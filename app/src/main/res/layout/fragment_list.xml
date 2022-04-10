@@ -25,11 +25,14 @@
                 android:id="@+id/search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:imeOptions="actionSearch"
+                android:inputType="textNoSuggestions"
+                android:selectAllOnFocus="true"
                 android:hint="@string/search"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list"
+            android:id="@+id/city_list"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/zero_margin"

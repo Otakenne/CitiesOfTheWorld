@@ -11,8 +11,9 @@ import com.otakenne.citiesoftheworld.domain.model.City
 import com.otakenne.citiesoftheworld.domain.repository.CityRepository
 import com.otakenne.citiesoftheworld.utility.Constants
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class CityRepositoryImplementation(
+class CityRepositoryImplementation @Inject constructor(
     private val database: Database,
     private val api: API
 ): CityRepository {

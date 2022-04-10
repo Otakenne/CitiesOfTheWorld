@@ -1,6 +1,8 @@
 package com.otakenne.citiesoftheworld.domain.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Data(
-    val items: List<City> = listOf(),
-    val pagination: Pagination
+    @SerializedName("items") val items: List<City> = emptyList(),
+    @SerializedName("pagination") val pagination: Pagination? = null
 )

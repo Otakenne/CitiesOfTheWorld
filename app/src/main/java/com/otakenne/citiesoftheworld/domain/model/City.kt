@@ -9,13 +9,13 @@ import com.google.gson.annotations.SerializedName
 data class City (
     @PrimaryKey
     @NonNull
-    val id: Long,
-    val name: String,
+    @SerializedName("id") val id: Long,
+    @SerializedName("name") val name: String,
     @SerializedName("local_name") val localName: String,
-    @SerializedName("lat") val latitude: String,
-    @SerializedName("lng") val longitude: String,
+    @SerializedName("lat") val latitude: Double,
+    @SerializedName("lng") val longitude: Double,
     @SerializedName("created_at") val createdAt: String,
     @SerializedName("updated_at") val updatedAt: String,
     @SerializedName("country_id") val countryId: Int,
-//    val country: Country? = null
+    @SerializedName("country") val country: Country? = null
 )

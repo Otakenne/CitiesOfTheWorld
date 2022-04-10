@@ -6,4 +6,5 @@
     <string name="search">Search</string>
     <string name="reload">Reload</string>
     <string name="no_results_text">There are no results for your search term, please change your search term and try again.</string>
+    <string name="retry">Retry</string>
 </resources>

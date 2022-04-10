@@ -11,6 +11,8 @@ import com.otakenne.citiesoftheworld.domain.model.City
 import com.otakenne.citiesoftheworld.domain.model.RemoteKeys
 import com.otakenne.citiesoftheworld.utility.Constants
 import retrofit2.HttpException
+import retrofit2.await
+import retrofit2.awaitResponse
 import java.io.IOException
 
 @OptIn(ExperimentalPagingApi::class)
@@ -24,7 +26,7 @@ class RemoteMediator(
         val page = when (loadType) {
             LoadType.REFRESH -> {
                 val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
-                remoteKeys?.nextKey?.minus(1) ?: Constants.GITHUB_STARTING_PAGE_INDEX
+                remoteKeys?.nextKey?.minus(1) ?: Constants.STARTING_PAGE_INDEX
             }
             LoadType.PREPEND -> {
                 val remoteKeys = getRemoteKeyForFirstItem(state)
@@ -43,14 +45,14 @@ class RemoteMediator(
                 nextKey
             }
         }
-        val apiQuery = query + Constants.IN_QUALIFIER
+        val apiQuery = query
 
         try {
             val apiResponse = api.getCities(
                 page = page.toString(),
                 include = "country",
                 filter = apiQuery
-            )
+            )//.awaitResponse().raw().request.url
 
             val cities = apiResponse.data.items
             val endOfPaginationReached = cities.isEmpty()
@@ -60,7 +62,7 @@ class RemoteMediator(
                     database.remoteKeysDao().clearRemoteKeys()
                     database.citiesDao().deleteCities()
                 }
-                val previousKeys = if (page == Constants.GITHUB_STARTING_PAGE_INDEX) null else page - 1
+                val previousKeys = if (page == Constants.STARTING_PAGE_INDEX) null else page - 1
                 val nextKeys = if (endOfPaginationReached) null else page + 1
                 val keys = cities.map {
                     RemoteKeys(cityID = it.id, previousKey = previousKeys, nextKey = nextKeys)

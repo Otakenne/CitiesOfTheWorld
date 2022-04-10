@@ -1,6 +1,8 @@
 package com.otakenne.citiesoftheworld.domain.model
 
+import com.google.gson.annotations.SerializedName
+
 data class APIResponse(
-    val data: Data,
-    val time: Long
+    @SerializedName("data") val data: Data,
+    @SerializedName("time") val time: Long
 )

@@ -1,15 +1,22 @@
 package com.otakenne.citiesoftheworld.data.data_source.api
 
 import com.otakenne.citiesoftheworld.domain.model.APIResponse
-import kotlinx.coroutines.flow.Flow
+import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface API {
-    @GET("")
+    @GET(".")
     suspend fun getCities(
         @Query("page") page: String = "1",
         @Query("include") include: String = "country",
-        @Query("filter") filter: String = ""
+        @Query("filter[0][name][contains]") filter: String = "lon"
     ): APIResponse
+
+    @GET(".")
+    fun getCities2(
+        @Query("page") page: String = "1",
+        @Query("include") include: String = "country",
+        @Query("filter[0][name][contains]") filter: String = "lon"
+    ): Call<APIResponse>
 }

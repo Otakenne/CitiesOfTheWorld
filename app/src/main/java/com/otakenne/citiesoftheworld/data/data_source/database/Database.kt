@@ -2,13 +2,16 @@ package com.otakenne.citiesoftheworld.data.data_source.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.otakenne.citiesoftheworld.domain.model.City
 import com.otakenne.citiesoftheworld.domain.model.RemoteKeys
 
 @Database(
     entities = [City::class, RemoteKeys::class],
-    version = 1
+    version = 4,
+    exportSchema = false
 )
+@TypeConverters(CountryTypeConverter::class)
 abstract class Database: RoomDatabase() {
 
     abstract fun citiesDao(): CityDao
