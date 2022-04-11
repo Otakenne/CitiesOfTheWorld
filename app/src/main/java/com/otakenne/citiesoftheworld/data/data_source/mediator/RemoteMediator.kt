@@ -57,7 +57,6 @@ class RemoteMediator(
             val cities = apiResponse.data.items
             val endOfPaginationReached = cities.isEmpty()
             database.withTransaction {
-                // clear all tables in the database
                 if (loadType == LoadType.REFRESH) {
                     database.remoteKeysDao().clearRemoteKeys()
                     database.citiesDao().deleteCities()
@@ -81,8 +80,6 @@ class RemoteMediator(
     private suspend fun getRemoteKeyClosestToCurrentPosition(
         state: PagingState<Int, City>
     ): RemoteKeys? {
-        // The paging library is trying to load data after the anchor position
-        // Get the item closest to the anchor position
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.id?.let { cityId ->
                 database.remoteKeysDao().getRemoteKeysFrom(cityId)
@@ -91,21 +88,15 @@ class RemoteMediator(
     }
 
     private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, City>): RemoteKeys? {
-        // Get the first page that was retrieved, that contained items.
-        // From that first page, get the first item
         return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()
             ?.let { city ->
-                // Get the remote keys of the first items retrieved
                 database.remoteKeysDao().getRemoteKeysFrom(city.id)
             }
     }
 
     private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, City>): RemoteKeys? {
-        // Get the last page that was retrieved, that contained items.
-        // From that last page, get the last item
         return state.pages.lastOrNull() { it.data.isNotEmpty() }?.data?.lastOrNull()
             ?.let { city ->
-                // Get the remote keys of the last item retrieved
                 database.remoteKeysDao().getRemoteKeysFrom(city.id)
             }
     }

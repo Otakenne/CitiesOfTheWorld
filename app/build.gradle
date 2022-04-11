@@ -15,6 +15,7 @@ android {
         targetSdk 31
         versionCode 1
         versionName "1.0"
+        buildConfigField("String", "MAP_KEY", MAP_KEY)
 
 //        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunner "com.otakenne.citiesoftheworld.HiltTestRunner"

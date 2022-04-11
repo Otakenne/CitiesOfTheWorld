@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CityViewModel @Inject constructor(
     private val useCases: UseCases,
-    savedStateHandle: SavedStateHandle
+    val savedStateHandle: SavedStateHandle
 ): ViewModel() {
 
     val state: StateFlow<UiState>
@@ -80,11 +80,11 @@ class CityViewModel @Inject constructor(
         return useCases.getCities.invoke(queryString)
     }
 
-//    override fun onCleared() {
-//        savedStateHandle[Constants.LAST_SEARCH_QUERY] = state.value.query
-//        savedStateHandle[Constants.LAST_QUERY_SCROLLED] = state.value.lastQueryScrolled
-//        super.onCleared()
-//    }
+    override fun onCleared() {
+        savedStateHandle[Constants.LAST_SEARCH_QUERY] = state.value.query
+        savedStateHandle[Constants.LAST_QUERY_SCROLLED] = state.value.lastQueryScrolled
+        super.onCleared()
+    }
 }
 
 data class UiState (

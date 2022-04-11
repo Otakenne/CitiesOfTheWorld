@@ -21,17 +21,12 @@ import javax.inject.Named
 
 @ExperimentalCoroutinesApi
 @SmallTest
-//@HiltAndroidTest
 class CityDaoTest {
-//    @get:Rule
-//    var hiltRule = HiltAndroidRule(this)
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-//    @Inject
-//    @Named("test_db")
-    lateinit var database: Database
+    private lateinit var database: Database
     private lateinit var dao: CityDao
 
     @Before
@@ -40,7 +35,6 @@ class CityDaoTest {
             ApplicationProvider.getApplicationContext(),
             Database::class.java
         ).allowMainThreadQueries().build()
-//        hiltRule.inject()
         dao = database.citiesDao()
     }
 

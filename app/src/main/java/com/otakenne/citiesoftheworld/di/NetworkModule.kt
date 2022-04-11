@@ -16,7 +16,6 @@ object NetworkModule {
     @Provides
     @Singleton
     fun providesAPI(): API {
-        //Todo: Check adapter factory
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(Constants.BASE_URL)

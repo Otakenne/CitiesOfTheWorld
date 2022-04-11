@@ -19,7 +19,7 @@ class RemoteKeysDaoTest {
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    lateinit var database: Database
+    private lateinit var database: Database
     private lateinit var dao: RemoteKeysDao
 
     @Before
@@ -28,7 +28,6 @@ class RemoteKeysDaoTest {
             ApplicationProvider.getApplicationContext(),
             Database::class.java
         ).allowMainThreadQueries().build()
-//        hiltRule.inject()
         dao = database.remoteKeysDao()
     }
 

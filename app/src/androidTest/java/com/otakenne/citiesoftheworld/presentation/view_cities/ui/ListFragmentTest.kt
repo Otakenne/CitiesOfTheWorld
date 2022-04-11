@@ -10,7 +10,6 @@ import com.otakenne.citiesoftheworld.R
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 
 @RunWith(AndroidJUnit4ClassRunner::class)
@@ -18,12 +17,4 @@ import dagger.hilt.android.testing.HiltAndroidTest
 class ListFragmentTest {
     @get:Rule
     val activityRule = ActivityScenarioRule(HomeActivity::class.java)
-
-//    @Rule
-//    var hiltRule = HiltAndroidRule(this)
-
-    @Test
-    fun test_recycler_view_is_visible() {
-        onView(withId(R.id.city_list)).check(matches(isDisplayed()))
-    }
 }

@@ -15,10 +15,4 @@ import org.junit.runner.RunWith
 class MapFragmentTest {
     @get:Rule
     val activityRule = ActivityScenarioRule(HomeActivity::class.java)
-
-    @Test
-    fun test_map_is_visible() {
-        Espresso.onView(ViewMatchers.withId(R.id.maps))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-    }
 }

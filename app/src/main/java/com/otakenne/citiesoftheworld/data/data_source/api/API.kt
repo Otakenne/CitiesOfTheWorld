@@ -10,13 +10,6 @@ interface API {
     suspend fun getCities(
         @Query("page") page: String = "1",
         @Query("include") include: String = "country",
-        @Query("filter[0][name][contains]") filter: String = "lon"
+        @Query("filter[0][name][contains]") filter: String = ""
     ): APIResponse
-
-    @GET(".")
-    fun getCities2(
-        @Query("page") page: String = "1",
-        @Query("include") include: String = "country",
-        @Query("filter[0][name][contains]") filter: String = "lon"
-    ): Call<APIResponse>
 }
