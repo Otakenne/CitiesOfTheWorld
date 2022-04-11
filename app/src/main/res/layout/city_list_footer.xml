@@ -12,12 +12,13 @@
         <TextView
             android:id="@+id/error_msg"
             android:textColor="?android:textColorPrimary"
-            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:layout_gravity="center"
             android:textAlignment="center"
-            tools:text="Timeout"/>
+            tools:text="Timeout"
+            style="@style/LocationTextView"/>
         <ProgressBar
             android:id="@+id/progress_bar"
             style="?android:attr/progressBarStyle"
@@ -28,9 +29,11 @@
             android:id="@+id/retry_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:layout_gravity="center"
-            android:backgroundTint="@color/black"
-            android:text="@string/retry"/>
+            android:background="@drawable/main_button_background"
+            android:text="@string/retry"
+            style="@style/BasicButton"/>
     </LinearLayout>
 
 </layout>

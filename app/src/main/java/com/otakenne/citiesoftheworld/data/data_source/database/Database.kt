@@ -8,7 +8,7 @@ import com.otakenne.citiesoftheworld.domain.model.RemoteKeys
 
 @Database(
     entities = [City::class, RemoteKeys::class],
-    version = 4,
+    version = 5,
     exportSchema = false
 )
 @TypeConverters(CountryTypeConverter::class)

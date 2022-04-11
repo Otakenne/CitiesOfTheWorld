@@ -48,6 +48,8 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (activity as HomeActivity).supportActionBar?.title = "Cities of the World"
+
         bindState(
             viewModel.state,
             viewModel.pagedCityFlow,
@@ -160,28 +162,12 @@ class ListFragment : Fragment() {
 
         lifecycleScope.launch {
             adapter.loadStateFlow.collect { loadState ->
-                val isListEmpty = loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
-                // show empty list
-                binding.noResultsText.isVisible = isListEmpty
-                // Only show the list if refresh succeeds.
-                binding.cityList.isVisible = !isListEmpty
-                // Show loading spinner during initial load or refresh.
-                binding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
-                // Show the retry state if initial load or refresh fails.
-                binding.retryButton.isVisible = loadState.source.refresh is LoadState.Error
+                val isListEmpty = adapter.itemCount == 0
 
-                // Toast on any error, regardless of whether it came from RemoteMediator or PagingSource
-                val errorState = loadState.source.append as? LoadState.Error
-                    ?: loadState.source.prepend as? LoadState.Error
-                    ?: loadState.append as? LoadState.Error
-                    ?: loadState.prepend as? LoadState.Error
-                errorState?.let {
-                    Toast.makeText(
-                        activity,
-                        "${it.error}",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
+                binding.noResultsText.isVisible = isListEmpty
+                binding.cityList.isVisible = !isListEmpty
+                binding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+                binding.retryButton.isVisible = loadState.source.refresh is LoadState.Error
             }
         }
     }

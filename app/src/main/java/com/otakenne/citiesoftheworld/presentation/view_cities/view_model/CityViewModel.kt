@@ -50,7 +50,6 @@ class CityViewModel @Inject constructor(
                 )
             }
 
-
         action = { action ->
             viewModelScope.launch { actionStateFlow.emit(action) }
         }
@@ -89,8 +88,8 @@ class CityViewModel @Inject constructor(
 }
 
 data class UiState (
-    val query: String = "ka",
-    val lastQueryScrolled: String = "ka",
+    val query: String = "",
+    val lastQueryScrolled: String = "",
     val hasNotScrolledForCurrentSearch: Boolean = false
 )
 
