@@ -11,15 +11,15 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Named
 import javax.inject.Singleton
 
-@Module
-@InstallIn(SingletonComponent::class)
-object DatabaseModule {
+//@Module
+//@InstallIn(SingletonComponent::class)
+//object DatabaseModule {
 
 //    @Provides
-    @Singleton
-    @Named("test_db")
-    fun provideInMemoryDB(@ApplicationContext context: Context) =
-        Room.inMemoryDatabaseBuilder(context, Database::class.java)
-            .allowMainThreadQueries()
-            .build()
-}
+//    @Singleton
+//    @Named("test_db")
+//    fun provideInMemoryDB(@ApplicationContext context: Context) =
+//        Room.inMemoryDatabaseBuilder(context, Database::class.java)
+//            .allowMainThreadQueries()
+//            .build()
+//}

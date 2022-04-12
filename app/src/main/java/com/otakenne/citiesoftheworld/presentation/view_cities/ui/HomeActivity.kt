@@ -35,7 +35,7 @@ class HomeActivity : AppCompatActivity() {
      * Documentation provided by Android
      */
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.home_menu, menu)
+//        menuInflater.inflate(R.menu.home_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -43,10 +43,10 @@ class HomeActivity : AppCompatActivity() {
      * Documentation provided by Android
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id: Int = item.itemId
-        if (id == R.id.mapFragment) {
-            return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
-        }
+//        val id: Int = item.itemId
+//        if (id == R.id.navigateToMapFragment) {
+//            return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
+//        }
         return super.onOptionsItemSelected(item)
     }
 }

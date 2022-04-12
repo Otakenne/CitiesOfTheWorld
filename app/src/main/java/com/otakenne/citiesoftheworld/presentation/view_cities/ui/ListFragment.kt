@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.paging.PagingData
@@ -48,7 +49,14 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as HomeActivity).supportActionBar?.title = "Cities of the World"
+        if (activity is HomeActivity) {
+            (activity as HomeActivity).supportActionBar?.title = "Cities of the World"
+        }
+
+        binding.switchToMapView.setOnClickListener {
+            val action = ListFragmentDirections.actionListFragmentToMapFragment()
+            findNavController().navigate(action)
+        }
 
         bindState(
             viewModel.state,

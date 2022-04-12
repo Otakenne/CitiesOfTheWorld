@@ -8,16 +8,12 @@ import com.google.common.truth.Truth.assertThat
 import com.otakenne.citiesoftheworld.domain.model.City
 import com.otakenne.citiesoftheworld.domain.model.Country
 import com.otakenne.citiesoftheworld.getOrAwaitValue
-import dagger.hilt.android.testing.HiltAndroidRule
-import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import javax.inject.Inject
-import javax.inject.Named
 
 @ExperimentalCoroutinesApi
 @SmallTest

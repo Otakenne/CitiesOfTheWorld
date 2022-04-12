@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_list" >
         <action
             android:id="@+id/action_listFragment_to_mapFragment"
-            app:destination="@id/mapFragment" />
+            app:destination="@id/navigateToMapFragment" />
     </fragment>
     <fragment
-        android:id="@+id/mapFragment"
+        android:id="@+id/navigateToMapFragment"
         android:name="com.otakenne.citiesoftheworld.presentation.view_cities.ui.MapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" />

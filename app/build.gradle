@@ -69,6 +69,10 @@ dependencies {
     implementation "androidx.room:room-paging:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
+    def mockito_version = '2.21.0'
+    testImplementation "org.mockito:mockito-core:$mockito_version" // For instrumentation tests on Android devices and emulators
+    androidTestImplementation "org.mockito:mockito-android:$mockito_version"
+
     // Navigation libraries
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_library_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_library_version"
@@ -94,6 +98,7 @@ dependencies {
     // Test Libraries
     androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
     testImplementation "androidx.arch.core:core-testing:2.1.0"
+    androidTestImplementation "androidx.fragment:fragment-testing:1.3.0-alpha08"
 
     // Truth
     testImplementation "com.google.truth:truth:1.1.3"

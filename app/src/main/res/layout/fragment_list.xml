@@ -18,7 +18,7 @@
             android:layout_marginTop="@dimen/default_margin"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/switch_to_map_view"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <EditText
@@ -30,6 +30,18 @@
                 android:selectAllOnFocus="true"
                 android:hint="@string/search"/>
         </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageButton
+            android:id="@+id/switch_to_map_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:padding="15dp"
+            android:src="@drawable/ic_baseline_location_on_24"
+            android:background="@drawable/main_button_background"
+            app:layout_constraintTop_toTopOf="@id/search_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/search_layout"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/city_list"
