@@ -1,12 +1,14 @@
 package com.otakenne.citiesoftheworld.presentation.view_cities.ui
 
 import androidx.navigation.NavController
-import androidx.test.espresso.Espresso
-import androidx.test.espresso.assertion.ViewAssertions
-import androidx.test.espresso.matcher.ViewMatchers
+import androidx.navigation.Navigation
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.Espresso.pressBack
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.filters.MediumTest
-import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.otakenne.citiesoftheworld.R
 import com.otakenne.citiesoftheworld.launchFragmentInHiltContainer
 import dagger.hilt.android.testing.HiltAndroidRule
@@ -15,30 +17,39 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 import org.mockito.Mockito.mock
+import org.mockito.Mockito.verify
 
 @MediumTest
 @ExperimentalCoroutinesApi
 @HiltAndroidTest
-//@RunWith(AndroidJUnit4ClassRunner::class)
 class MapFragmentTest {
-//    @get:Rule
-//    val activityRule = ActivityScenarioRule(HomeActivity::class.java)
+    @get:Rule
+    val activityRule = ActivityScenarioRule(HomeActivity::class.java)
 
     @get:Rule
     var hiltRule = HiltAndroidRule(this)
 
+    private lateinit var navController: NavController
+
     @Before
     fun setup() {
         hiltRule.inject()
+
+        navController = mock(NavController::class.java)
+        launchFragmentInHiltContainer<MapFragment> {
+            Navigation.setViewNavController(requireView(), navController)
+        }
     }
 
     @Test
-    fun frag() {
-        val navController = mock(NavController::class.java)
-        launchFragmentInHiltContainer<MapFragment> {
+    fun verifyBackButtonPopsBackStack() {
+        pressBack()
+        verify(navController).popBackStack()
+    }
 
-        }
+    @Test
+    fun verifyMapShowsUp() {
+        onView(withId(R.id.maps)).check(matches(isDisplayed()))
     }
 }

@@ -4,6 +4,8 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.filters.MediumTest
@@ -20,7 +22,6 @@ import org.mockito.Mockito.verify
 
 @MediumTest
 @ExperimentalCoroutinesApi
-//@RunWith(AndroidJUnit4ClassRunner::class)
 @HiltAndroidTest
 class ListFragmentTest {
     @get:Rule
@@ -29,21 +30,43 @@ class ListFragmentTest {
     @get:Rule
     var hiltRule = HiltAndroidRule(this)
 
+    private lateinit var navController: NavController
+
     @Before
     fun setup() {
         hiltRule.inject()
-    }
 
-    @Test
-    fun frag() {
-        val navController = Mockito.mock(NavController::class.java)
+        navController = Mockito.mock(NavController::class.java)
         launchFragmentInHiltContainer<ListFragment> {
             Navigation.setViewNavController(requireView(), navController)
         }
+    }
 
+    @Test
+    fun verifySwitchToMapViewButtonNavigatesToMapFragment() {
         onView(withId(R.id.switch_to_map_view)).perform(click())
         verify(navController).navigate(
             ListFragmentDirections.actionListFragmentToMapFragment()
         )
+    }
+
+    @Test
+    fun verifySwitchToMapViewButtonShowsUp() {
+        onView(withId(R.id.switch_to_map_view)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    }
+
+    @Test
+    fun verifySearchFieldShowsUp() {
+        onView(withId(R.id.search)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    }
+
+    @Test
+    fun verifySearchLayoutShowsUp() {
+        onView(withId(R.id.search_layout)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    }
+
+    @Test
+    fun verifyCityListRecyclerViewShowsUp() {
+        onView(withId(R.id.city_list)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 }

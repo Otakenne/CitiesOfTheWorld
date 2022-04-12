@@ -8,6 +8,7 @@ import com.google.common.truth.Truth.assertThat
 import com.otakenne.citiesoftheworld.domain.model.City
 import com.otakenne.citiesoftheworld.domain.model.Country
 import com.otakenne.citiesoftheworld.getOrAwaitValue
+import com.otakenne.citiesoftheworld.utility.CityFactory
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -43,20 +44,10 @@ class CityDaoTest {
     fun insertCitiesTest() = runBlocking {
         val numberOfEntries = 5
         val cities = mutableListOf<City>()
+        val cityFactory = CityFactory()
 
         for (i in 1..numberOfEntries) {
-            val city = City(
-                id = i.toLong(),
-                name = "city cne",
-                localName = "",
-                latitude = 0.0,
-                longitude = 0.0,
-                createdAt = "",
-                updatedAt = "",
-                countryId = i,
-                country = Country(i, "", "", "", "", i)
-            )
-            cities.add(city)
+            cities.add(cityFactory.createCity())
         }
 
         dao.insertCities(cities)
@@ -68,20 +59,10 @@ class CityDaoTest {
     fun deleteAllCitiesTest() = runBlocking {
         val numberOfEntries = 5
         val cities = mutableListOf<City>()
+        val cityFactory = CityFactory()
 
         for (i in 1..numberOfEntries) {
-            val city = City(
-                id = i.toLong(),
-                name = "city cne",
-                localName = "",
-                latitude = 0.0,
-                longitude = 0.0,
-                createdAt = "",
-                updatedAt = "",
-                countryId = i,
-                country = Country(i, "", "", "", "", i)
-            )
-            cities.add(city)
+            cities.add(cityFactory.createCity())
         }
 
         dao.insertCities(cities)
