@@ -13,8 +13,8 @@ interface API {
     /**
      * Returns all the cities related to search term (filter) from the Square1 backend
      * @param page: integer to control pagination
-     * @param include: search term (lagos)
-     * @param filter: search term (lagos)
+     * @param include: flag to include the country class/object as part of the API response
+     * @param filter: search term
      * @return RxJava single shot of the GithubUserResponse model
      * @author Otakenne
      */

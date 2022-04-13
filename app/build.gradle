@@ -68,7 +68,6 @@ dependencies {
     implementation "androidx.room:room-paging:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
-    def mockito_version = '2.21.0'
     testImplementation "org.mockito:mockito-core:$mockito_version"
     androidTestImplementation "org.mockito:mockito-android:$mockito_version"
 
