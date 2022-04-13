@@ -3,7 +3,9 @@ package com.otakenne.citiesoftheworld.domain.model
 import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.android.gms.maps.model.LatLng
 import com.google.gson.annotations.SerializedName
+import com.google.maps.android.clustering.ClusterItem
 
 @Entity(tableName = "city_table")
 data class City (
@@ -18,4 +20,10 @@ data class City (
     @SerializedName("updated_at") val updatedAt: String?,
     @SerializedName("country_id") val countryId: Int?,
     @SerializedName("country") val country: Country? = null
-)
+): ClusterItem {
+    override fun getPosition(): LatLng = LatLng((latitude ?: 0.0), ((longitude ?: 0.0)))
+
+    override fun getTitle(): String = name ?: "City X"
+
+    override fun getSnippet(): String = "$name in ${country?.name}"
+}

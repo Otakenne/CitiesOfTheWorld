@@ -5,7 +5,19 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+/**
+ * Interface responsible for calls to the Square1's City API
+ * @author Otakenne
+ */
 interface API {
+    /**
+     * Returns all the cities related to search term (filter) from the Square1 backend
+     * @param page: integer to control pagination
+     * @param include: search term (lagos)
+     * @param filter: search term (lagos)
+     * @return RxJava single shot of the GithubUserResponse model
+     * @author Otakenne
+     */
     @GET(".")
     suspend fun getCities(
         @Query("page") page: String = "1",

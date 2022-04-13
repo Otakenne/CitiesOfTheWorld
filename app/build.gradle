@@ -84,6 +84,9 @@ dependencies {
     implementation "com.google.android.gms:play-services-maps:$google_maps_sdk_version"
     implementation "com.google.maps.android:android-maps-utils:$google_maps_utility_version"
 
+    // Google Maps Utility
+    implementation 'com.google.maps.android:android-maps-utils:1.1.0'
+
     // Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"

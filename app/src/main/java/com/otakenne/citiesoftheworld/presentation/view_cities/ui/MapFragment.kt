@@ -2,7 +2,6 @@ package com.otakenne.citiesoftheworld.presentation.view_cities.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
@@ -12,28 +11,28 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.maps.android.clustering.ClusterManager
 import com.otakenne.citiesoftheworld.R
 import com.otakenne.citiesoftheworld.databinding.FragmentMapBinding
+import com.otakenne.citiesoftheworld.domain.model.City
 import com.otakenne.citiesoftheworld.presentation.view_cities.adapters.CityAdapter
+import com.otakenne.citiesoftheworld.presentation.view_cities.map_utility.CityRenderer
 import com.otakenne.citiesoftheworld.presentation.view_cities.view_model.CityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MapFragment : Fragment(), OnMapReadyCallback {
+class MapFragment : Fragment() {
 
     private lateinit var _binding: FragmentMapBinding
     private val binding get() = _binding
 
     private val viewModel: CityViewModel by activityViewModels()
     private lateinit var googleMaps: GoogleMap
+    private var cities = mutableListOf<City>()
 
     @Inject
     lateinit var adapter: CityAdapter
@@ -60,31 +59,35 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         }
         requireActivity().onBackPressedDispatcher.addCallback(callback)
 
+        getData()
+
         val mapFragment = childFragmentManager.findFragmentById(R.id.maps) as SupportMapFragment?
-        mapFragment?.getMapAsync(this)
+        mapFragment?.getMapAsync{
+            addClusteredMarkers(it)
+        }
     }
 
-    override fun onMapReady(p0: GoogleMap) {
-        googleMaps = p0
-
+    private fun getData() {
         lifecycleScope.launch {
             viewModel.pagedCityFlow.collect (adapter::submitData)
         }
 
         for (city in adapter.snapshot().items) {
-            if (city.latitude != null && city.longitude != null) {
-                val latLng = LatLng(city.latitude, city.longitude)
-                googleMaps.addMarker(
-                    MarkerOptions().position(latLng).title(city.name)
-                )
-                googleMaps.animateCamera(CameraUpdateFactory.zoomTo(2.0f));
-                googleMaps.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-            }
+            cities.add(city)
         }
     }
 
-//    override fun onPrepareOptionsMenu(menu: Menu) {
-//        menu.findItem(R.id.navigateToMapFragment).isVisible = false
-//        super.onPrepareOptionsMenu(menu)
-//    }
+    private fun addClusteredMarkers(googleMap: GoogleMap) {
+        val clusterManager = ClusterManager<City>(requireContext(), googleMap)
+        clusterManager.renderer = CityRenderer(requireContext(), googleMap, clusterManager)
+
+//        clusterManager.markerCollection.setInfoWindowAdapter(MarkerInfoWindowAdapter(this))
+
+        clusterManager.addItems(cities)
+        clusterManager.cluster()
+
+        googleMap.setOnCameraIdleListener {
+            clusterManager.onCameraIdle()
+        }
+    }
 }
