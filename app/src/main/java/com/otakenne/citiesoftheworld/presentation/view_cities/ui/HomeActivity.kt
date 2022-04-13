@@ -19,34 +19,34 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-//        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-//        navController = navHostFragment.navController
-//        NavigationUI.setupActionBarWithNavController(this, navController)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
+        NavigationUI.setupActionBarWithNavController(this, navController)
     }
 
     /**
      * Documentation provided by Android
      */
-//    override fun onSupportNavigateUp(): Boolean {
-//        return navController.navigateUp() || super.onSupportNavigateUp()
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
+    /**
+     * Documentation provided by Android
+     */
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.home_menu, menu)
+//        return super.onCreateOptionsMenu(menu)
 //    }
 
     /**
      * Documentation provided by Android
      */
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.home_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    /**
-     * Documentation provided by Android
-     */
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 //        val id: Int = item.itemId
 //        if (id == R.id.navigateToMapFragment) {
 //            return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
 //        }
-        return super.onOptionsItemSelected(item)
-    }
+//        return super.onOptionsItemSelected(item)
+//    }
 }

@@ -7,4 +7,6 @@
     <string name="reload">Reload</string>
     <string name="no_results_text">There are no results for your search term, please change your search term and try again.</string>
     <string name="retry">Retry</string>
+    <string name="latitude">Latitude: %1$s</string>
+    <string name="longitude">Longitude: %1$s</string>
 </resources>

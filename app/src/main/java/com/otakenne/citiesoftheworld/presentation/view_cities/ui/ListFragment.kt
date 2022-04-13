@@ -116,10 +116,10 @@ class ListFragment : Fragment() {
 
     private fun updateListFromInput(onQueryChanged: (UiAction.Search) -> Unit) {
         binding.search.text.trim().let {
-            if (it.isNotEmpty()) {
+//            if (it.isNotEmpty()) {
                 binding.cityList.scrollToPosition(0)
                 onQueryChanged(UiAction.Search(query = it.toString()))
-            }
+//            }
         }
     }
 
@@ -170,7 +170,7 @@ class ListFragment : Fragment() {
 
         lifecycleScope.launch {
             adapter.loadStateFlow.collect { loadState ->
-                val isListEmpty = adapter.itemCount == 0
+                val isListEmpty = loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
 
                 binding.noResultsText.isVisible = isListEmpty
                 binding.cityList.isVisible = !isListEmpty

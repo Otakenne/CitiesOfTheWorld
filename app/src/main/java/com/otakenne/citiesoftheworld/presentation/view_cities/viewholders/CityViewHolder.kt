@@ -1,5 +1,6 @@
 package com.otakenne.citiesoftheworld.presentation.view_cities.viewholders
 
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -12,8 +13,30 @@ class CityViewHolder(private val binding: CityRowBinding) : RecyclerView.ViewHol
     fun bind(city: City) {
         binding.cityName.text = city.name
         binding.countryName.text = city.country?.name ?: "na"
-        binding.latitude.text = "Latitude: ${city.latitude?.let { Math.roundCoordinate(it, 5) }}"
-        binding.longitude.text = "Longitude: ${city.longitude?.let { Math.roundCoordinate(it, 5) }}"
+
+        if (city.latitude != null) {
+            binding.latitude.text = binding.latitude.context.getString(
+                R.string.latitude,
+                Math.roundCoordinate(city.latitude, 5)
+            )
+        } else {
+            binding.latitude.text = binding.latitude.context.getString(
+                R.string.latitude,
+                "0.0"
+            )
+        }
+
+        if (city.longitude != null) {
+            binding.longitude.text = binding.latitude.context.getString(
+                R.string.longitude,
+                Math.roundCoordinate(city.longitude, 5)
+            )
+        } else {
+            binding.longitude.text = binding.latitude.context.getString(
+                R.string.longitude,
+                "0.0"
+            )
+        }
     }
 
     companion object {

@@ -22,6 +22,7 @@ import com.otakenne.citiesoftheworld.presentation.view_cities.adapters.CityAdapt
 import com.otakenne.citiesoftheworld.presentation.view_cities.view_model.CityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -40,7 +41,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentMapBinding.inflate(inflater, container, false)
         return binding.root
     }

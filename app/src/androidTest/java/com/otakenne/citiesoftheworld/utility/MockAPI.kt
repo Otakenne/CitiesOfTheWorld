@@ -4,7 +4,6 @@ import com.otakenne.citiesoftheworld.data.data_source.api.API
 import com.otakenne.citiesoftheworld.domain.model.APIResponse
 import com.otakenne.citiesoftheworld.domain.model.City
 import com.otakenne.citiesoftheworld.domain.model.Data
-import com.otakenne.citiesoftheworld.domain.model.Pagination
 import retrofit2.http.Query
 import java.io.IOException
 
